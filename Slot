@@ -1,0 +1,64 @@
+/*
+	Author: Juan Segoviano
+	Class: ITCS 1213-001
+	Lab: ITCS 1213-L04
+	Program: Slot.java
+	Purpose: The purpose of this program is to 
+				serve as the main (driver) class
+				of the Slot Machine program. The 
+				program will contain the variables
+				needed to operate the program.
+				It will ask the user for an amount
+				of money to be betted, run the operations,
+				and reveal the "images" and winnings on 
+				the screen.
+*/
+
+import java.util.Scanner;
+
+public  class Slot
+{
+	public static void main(String[] args)
+	{
+		Scanner keyboard = new Scanner(System.in); //Needed for the program to ask for the bet(s)
+		
+		//The variables needed for the driver class
+		double cashGambled; //user's bet(s)
+		String input;
+		char repeat = 'Y'; //The user's possible decision to play again
+		double betEntries = 0; //Used to add up the placed bets
+		double luckyWinnings = 0; //Used to add up all the winnings
+		
+		Machine lasVegas; //the object needed for the program
+		
+		//The following is a while loop to be used to execute the program and
+		//to ask the user for continuation of use of the slot machine
+		while(repeat == 'Y' || repeat == 'y')
+		{
+			System.out.println("Welcome to the slots! Place your bet(s):$ ");
+		   cashGambled = keyboard.nextDouble();
+
+			
+			lasVegas = new Machine(cashGambled);
+			
+			System.out.println("|" + lasVegas.getSlotNumber1() + "|" + lasVegas.getSlotNumber2() + "|" + lasVegas.getSlotNumber3() + "|");
+			System.out.println("You won:$ " + lasVegas.getWinnings());
+			
+			keyboard.nextLine();
+			System.out.println("Wanna try your luck again? Please enter 'Y' to continue or 'N' to quit: ");
+			input = keyboard.nextLine();
+			repeat = input.charAt(0);
+			
+			betEntries += (cashGambled); //This trick will add up the placed bets
+			luckyWinnings += (lasVegas.getWinnings()); //This trick is used to add up all the winnings
+		}
+		
+		System.out.println("Overall, You've betted $ " + betEntries +
+								", won $ " + luckyWinnings + ". In the end, "
+								+ "you have earned a net worth of $ " 
+								+ (luckyWinnings - betEntries) + " dollars. Thanks for playing!");
+								
+	}
+}
+		
+		 
